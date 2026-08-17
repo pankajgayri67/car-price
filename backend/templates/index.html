@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Price Predictor Pro</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- ====== NAVBAR ====== -->
+<nav class="navbar navbar-expand-lg navbar-dark glass-nav fixed-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#">
+      <i class="fa-solid fa-car-side me-2" style="color:#00d4ff;"></i>AutoPredict<span style="color:#00d4ff;">Pro</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link active" href="#"><i class="fa-solid fa-house me-1"></i>Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#how-it-works"><i class="fa-solid fa-question-circle me-1"></i>How It Works</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com" target="_blank"><i class="fa-brands fa-github me-1"></i>GitHub</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ====== HERO SECTION ====== -->
+<section class="hero-section">
+  <div id="particles-js"></div>
+  <div class="container hero-content">
+    <div class="row align-items-center">
+      <div class="col-lg-6 hero-left animate__animated animate__fadeInLeft">
+        <div class="hero-badge">
+          <span class="badge-glow"><i class="fa-solid fa-robot me-2"></i>AI-POWERED</span>
+        </div>
+        <h1 class="hero-title">Know Your Car's<br><span class="gradient-text">True Market Value</span></h1>
+        <p class="hero-subtitle">Leverage the power of Machine Learning to get accurate price predictions for any car in seconds. Trusted by 10,000+ users.</p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number">98.7%</span>
+            <span class="stat-label">Accuracy</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">10K+</span>
+            <span class="stat-label">Predictions</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number"><1s</span>
+            <span class="stat-label">Response</span>
+          </div>
+        </div>
+        <a href="#predict-section" class="btn btn-glow mt-3">
+          <i class="fa-solid fa-magic me-2"></i>Predict Now
+          <i class="fa-solid fa-arrow-right ms-2"></i>
+        </a>
+      </div>
+      <div class="col-lg-6 hero-right animate__animated animate__fadeInRight">
+        <div class="floating-car">
+          <i class="fa-solid fa-car-side fa-10x"></i>
+          <div class="speed-lines">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wave-divider">
+    <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+      <path d="M0,50 C360,120 1080,-20 1440,50 L1440,100 L0,100 Z" fill="rgba(10,10,31,0.95)"></path>
+    </svg>
+  </div>
+</section>
+
+<!-- ====== PREDICT SECTION ====== -->
+<section id="predict-section" class="predict-section">
+  <div class="container">
+    <div class="section-header text-center animate-on-scroll">
+      <span class="section-badge"><i class="fa-solid fa-sliders me-2"></i>CAR DETAILS</span>
+      <h2>Enter Your Car Specifications</h2>
+      <p>Fill in the details below and our AI will analyze the market to predict the best price.</p>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="predict-card animate-on-scroll">
+          <div class="card-glow"></div>
+          <div class="card-tabs">
+            <div class="tab active" data-tab="numerical">
+              <i class="fa-solid fa-sliders"></i>
+              <span>Specifications</span>
+            </div>
+            <div class="tab" data-tab="categorical">
+              <i class="fa-solid fa-list"></i>
+              <span>Features</span>
+            </div>
+          </div>
+
+          <form id="predictionForm">
+            <!-- NUMERICAL TAB -->
+            <div class="tab-content active" id="tab-numerical">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="input-label"><i class="fa-solid fa-ruler me-2 icon-accent"></i>Wheelbase</label>
+                  <div class="input-group-custom">
+                    <input type="number" step="0.01" id="wheelbase" class="form-control-input" placeholder="e.g. 98.0" required>
+                    <span class="input-suffix">in</span>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="input-label"><i class="fa-solid fa-ruler-combined me-2 icon-accent"></i>Car Length</label>
+                  <div class="input-group-custom">
+                    <input type="number" step="0.01" id="carlength" class="form-control-input" placeholder="e.g. 170.0" required>
+                    <span class="input-suffix">in</span>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="input-label"><i class="fa-solid fa-arrows-left-right me-2 icon-accent"></i>Car Width</label>
+                  <div class="input-group-custom">
+                    <input type="number" step="0.01" id="carwidth" class="form-control-input" placeholder="e.g. 65.0" required>
+                    <span class="input-suffix">in</span>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="input-label"><i class="fa-solid fa-arrows-up-down me-2 icon-accent"></i>Car Height</label>
+                  <div class="input-group-custom">
+                    <input type="number" step="0.01" id="carheight" class="form-control-input" placeholder="e.g. 54.0" required>
+                    <span class="input-suffix">in</span>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="input-label"><i class="fa-solid fa-weight-scale me-2 icon-accent"></i>Curb Weight</label>
+                  <div class="input-group-custom">
+                    <input type="number" step="0.1" id="curbweight" class="form-control-input" placeholder="e.g. 2500" required>
+                    <span class="input-suffix">lbs</span>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="input-label"><i class="fa-solid fa-engine me-2 icon-accent"></i>Engine Size</label>
+                  <div class="input-group-custom">
+                    <input type="number" step="0.1" id="engine" class="form-control-input" placeholder="e.g. 130" required>
+                    <span class="input-suffix">CC</span>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="input-label"><i class="fa-solid fa-circle-notch me-2 icon-accent"></i>Bore Ratio</label>
+                  <div class="input-group-custom">
+                    <input type="number" step="0.01" id="boreratio" class="form-control-input" placeholder="e.g. 3.3" required>
+                    <span class="input-suffix">:1</span>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="input-label"><i class="fa-solid fa-horse-head me-2 icon-accent"></i>Horse Power</label>
+                  <div class="input-group-custom">
+                    <input type="number" step="0.1" id="hp" class="form-control-input" placeholder="e.g. 100" required>
+                    <span class="input-suffix">HP</span>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="input-label"><i class="fa-solid fa-gas-pump me-2 icon-accent"></i>City MPG</label>
+                  <div class="input-group-custom">
+                    <input type="number" step="0.1" id="citympg" class="form-control-input" placeholder="e.g. 25" required>
+                    <span class="input-suffix">mpg</span>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="input-label"><i class="fa-solid fa-road me-2 icon-accent"></i>Highway MPG</label>
+                  <div class="input-group-custom">
+                    <input type="number" step="0.1" id="highwaympg" class="form-control-input" placeholder="e.g. 30" required>
+                    <span class="input-suffix">mpg</span>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-nav text-center mt-3">
+                <button type="button" class="btn btn-tab-next" onclick="switchTab('categorical')">
+                  Next: Features <i class="fa-solid fa-arrow-right ms-2"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- CATEGORICAL TAB -->
+            <div class="tab-content" id="tab-categorical">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="input-label"><i class="fa-solid fa-gas-pump me-2 icon-accent"></i>Fuel Type</label>
+                  <div class="select-wrapper">
+                    <select id="fuel" class="form-select-input">
+                      <option value="gas">Gasoline</option>
+                      <option value="diesel">Diesel</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down select-arrow"></i>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="input-label"><i class="fa-solid fa-fan me-2 icon-accent"></i>Aspiration</label>
+                  <div class="select-wrapper">
+                    <select id="aspiration" class="form-select-input">
+                      <option value="std">Standard</option>
+                      <option value="turbo">Turbo</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down select-arrow"></i>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="input-label"><i class="fa-solid fa-door-open me-2 icon-accent"></i>Door Number</label>
+                  <div class="select-wrapper">
+                    <select id="doornumber" class="form-select-input">
+                      <option value="four">4 Doors</option>
+                      <option value="two">2 Doors</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down select-arrow"></i>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="input-label"><i class="fa-solid fa-car me-2 icon-accent"></i>Car Body</label>
+                  <div class="select-wrapper">
+                    <select id="carbody" class="form-select-input">
+                      <option value="sedan">Sedan</option>
+                      <option value="hatchback">Hatchback</option>
+                      <option value="wagon">Wagon</option>
+                      <option value="hardtop">Hardtop</option>
+                      <option value="convertible">Convertible</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down select-arrow"></i>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="input-label"><i class="fa-solid fa-circle me-2 icon-accent"></i>Drive Wheel</label>
+                  <div class="select-wrapper">
+                    <select id="drivewheel" class="form-select-input">
+                      <option value="fwd">Front Wheel Drive</option>
+                      <option value="rwd">Rear Wheel Drive</option>
+                      <option value="4wd">4-Wheel Drive</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down select-arrow"></i>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="input-label"><i class="fa-solid fa-location-dot me-2 icon-accent"></i>Engine Location</label>
+                  <div class="select-wrapper">
+                    <select id="enginelocation" class="form-select-input">
+                      <option value="front">Front</option>
+                      <option value="rear">Rear</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down select-arrow"></i>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="input-label"><i class="fa-solid fa-microchip me-2 icon-accent"></i>Engine Type</label>
+                  <div class="select-wrapper">
+                    <select id="enginetype" class="form-select-input">
+                      <option value="ohc">OHC</option>
+                      <option value="ohcf">OHCF</option>
+                      <option value="ohcv">OHCV</option>
+                      <option value="dohc">DOHC</option>
+                      <option value="dohcv">DOHCV</option>
+                      <option value="l">L</option>
+                      <option value="rotor">Rotor</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down select-arrow"></i>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="input-label"><i class="fa-solid fa-bolt me-2 icon-accent"></i>Cylinder Number</label>
+                  <div class="select-wrapper">
+                    <select id="cylindernumber" class="form-select-input">
+                      <option value="four">4</option>
+                      <option value="six">6</option>
+                      <option value="five">5</option>
+                      <option value="eight">8</option>
+                      <option value="two">2</option>
+                      <option value="three">3</option>
+                      <option value="twelve">12</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down select-arrow"></i>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="input-label"><i class="fa-solid fa-filter me-2 icon-accent"></i>Fuel System</label>
+                  <div class="select-wrapper">
+                    <select id="fuelsystem" class="form-select-input">
+                      <option value="mpfi">MPFI</option>
+                      <option value="2bbl">2BBL</option>
+                      <option value="idi">IDI</option>
+                      <option value="1bbl">1BBL</option>
+                      <option value="spdi">SPDI</option>
+                      <option value="4bbl">4BBL</option>
+                      <option value="mfi">MFI</option>
+                      <option value="spfi">SPFI</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down select-arrow"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-nav text-center mt-3 d-flex justify-content-between">
+                <button type="button" class="btn btn-tab-prev" onclick="switchTab('numerical')">
+                  <i class="fa-solid fa-arrow-left me-2"></i> Back
+                </button>
+                <button type="reset" class="btn btn-reset-clean">
+                  <i class="fa-solid fa-rotate me-2"></i>Reset All
+                </button>
+              </div>
+            </div>
+
+            <!-- SUBMIT BUTTON - Always visible -->
+            <div class="text-center mt-4 predict-action">
+              <button type="submit" class="btn btn-predict-main" id="predictBtn">
+                <span class="btn-content">
+                  <i class="fa-solid fa-chart-line me-2"></i>
+                  <span id="btnText">Predict Price</span>
+                  <div class="spinner-border spinner-border-sm ms-2 d-none" id="btnSpinner" role="status"></div>
+                </span>
+                <span class="btn-bg"></span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== RESULT SECTION ====== -->
+<section id="result-section" class="result-section d-none">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="result-card animate-on-scroll">
+          <div class="result-glow"></div>
+          <div class="row align-items-center">
+            <div class="col-md-5 text-center result-icon-col">
+              <div class="result-icon-animation">
+                <i class="fa-solid fa-circle-check fa-6x"></i>
+              </div>
+              <p class="result-label">Estimated Market Value</p>
+            </div>
+            <div class="col-md-7 result-price-col">
+              <div class="price-container">
+                <span class="price-currency">$</span>
+                <span class="price-value" id="price">--</span>
+              </div>
+              <div class="price-breakdown">
+                <div class="price-meta">
+                  <i class="fa-solid fa-calendar me-1"></i>
+                  <span>Price as of <span id="currentDate"></span></span>
+                </div>
+                <div class="price-meta">
+                  <i class="fa-solid fa-shield-halved me-1"></i>
+                  <span>Verified Prediction</span>
+                </div>
+              </div>
+              <div class="result-actions mt-3">
+                <button class="btn btn-outline-light-sm" onclick="document.getElementById('predictionForm').reset(); document.getElementById('result-section').classList.add('d-none'); document.getElementById('price').textContent = '--';">
+                  <i class="fa-solid fa-arrow-left me-2"></i>New Prediction
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== HOW IT WORKS ====== -->
+<section id="how-it-works" class="how-section">
+  <div class="container">
+    <div class="section-header text-center animate-on-scroll">
+      <span class="section-badge"><i class="fa-solid fa-bolt me-2"></i>PROCESS</span>
+      <h2>How It Works</h2>
+      <p>Three simple steps to get your car's estimated market value.</p>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="step-card animate-on-scroll">
+          <div class="step-number">01</div>
+          <div class="step-icon"><i class="fa-solid fa-pen-to-square"></i></div>
+          <h4>Enter Details</h4>
+          <p>Fill in your car's specifications — dimensions, engine, and features.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="step-card animate-on-scroll" data-delay="200">
+          <div class="step-number">02</div>
+          <div class="step-icon"><i class="fa-solid fa-brain"></i></div>
+          <h4>AI Analysis</h4>
+          <p>Our trained ML model processes the data using Random Forest algorithm.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="step-card animate-on-scroll" data-delay="400">
+          <div class="step-number">03</div>
+          <div class="step-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+          <h4>Get Price</h4>
+          <p>Receive an accurate price prediction in seconds, instantly.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer class="footer-section">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <i class="fa-solid fa-car-side me-2" style="color:#00d4ff;"></i>AutoPredict<span style="color:#00d4ff;">Pro</span>
+      </div>
+      <p class="footer-text">Built with <i class="fa-solid fa-heart" style="color:#ff6b6b;"></i> using Flask, Scikit-Learn &amp; Bootstrap</p>
+      <div class="footer-links">
+        <a href="#"><i class="fa-brands fa-github"></i></a>
+        <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+      </div>
+      <p class="footer-copy">&copy; 2026 AutoPredictPro. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ====== SCRIPTS ====== -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

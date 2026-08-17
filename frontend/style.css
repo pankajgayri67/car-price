@@ -1,0 +1,173 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#4f46e5,#2563eb,#06b6d4);
+    background-size:400% 400%;
+    animation:gradient 12s ease infinite;
+}
+
+@keyframes gradient{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.overlay{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px 15px;
+}
+
+.glass-card{
+    width:100%;
+    max-width:900px;
+    padding:35px;
+    border-radius:20px;
+    background:rgba(255,255,255,.15);
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,.25);
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+    color:white;
+    animation:fadeIn .8s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.car-icon{
+    font-size:65px;
+    color:#FFD700;
+    margin-bottom:10px;
+}
+
+h1{
+    font-weight:700;
+}
+
+p{
+    color:#f2f2f2;
+}
+
+label{
+    font-weight:500;
+    margin-bottom:6px;
+}
+
+.form-control,
+.form-select{
+    height:50px;
+    border-radius:10px;
+    border:none;
+    background:rgba(255,255,255,.92);
+}
+
+.form-control:focus,
+.form-select:focus{
+    border:none;
+    box-shadow:0 0 10px rgba(255,255,255,.6);
+}
+
+.predict-btn{
+    background:linear-gradient(90deg,#ff6b6b,#ff9800);
+    border:none;
+    padding:12px 35px;
+    border-radius:30px;
+    font-size:18px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.predict-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 20px rgba(0,0,0,.25);
+}
+
+.btn-outline-light{
+    margin-left:12px;
+    border-radius:30px;
+    padding:12px 30px;
+}
+
+.result-box{
+    margin-top:35px;
+    padding:25px;
+    text-align:center;
+    background:rgba(255,255,255,.12);
+    border-radius:15px;
+    border:1px solid rgba(255,255,255,.2);
+}
+
+.result-box h3{
+    color:#ffffff;
+    margin-bottom:10px;
+}
+
+#price{
+    color:#00ff88;
+    font-size:42px;
+    font-weight:bold;
+}
+
+footer{
+    text-align:center;
+    color:white;
+    margin-top:25px;
+    font-size:15px;
+}
+
+.glass-card:hover{
+    transform:translateY(-5px);
+    transition:.4s;
+}
+
+.form-control:hover,
+.form-select:hover{
+    transform:scale(1.02);
+    transition:.3s;
+}
+
+@media(max-width:768px){
+
+.glass-card{
+    padding:20px;
+}
+
+.car-icon{
+    font-size:45px;
+}
+
+h1{
+    font-size:28px;
+}
+
+.predict-btn,
+.btn-outline-light{
+    width:100%;
+    margin:8px 0;
+}
+
+#price{
+    font-size:30px;
+}
+
+}
